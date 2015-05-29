@@ -4,7 +4,7 @@
   "description": "Sunrise Backend Engineer Challenge",
   "main": "./server",
   "scripts": {
-    "test": "lab"
+    "test": "standard && lab"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,9 @@
     "hapi": "~8.5.3",
     "joi": "~6.4.3",
     "wreck": "~5.5.1"
+  },
+  "devDependencies": {
+    "lab": "~5.9.0",
+    "standard": "~3.11.1"
   }
 }
