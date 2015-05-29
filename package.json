@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/bendrucker/sunrise-backend-challenge/issues"
   },
-  "homepage": "https://github.com/bendrucker/sunrise-backend-challenge#readme"
+  "homepage": "https://github.com/bendrucker/sunrise-backend-challenge#readme",
+  "dependencies": {
+    "bell": "~3.0.0",
+    "catbox": "~4.2.2",
+    "catbox-memory": "~1.1.1",
+    "good": "~6.1.4",
+    "good-console": "~5.0.1",
+    "hapi": "~8.5.3",
+    "joi": "~6.4.3",
+    "wreck": "~5.5.1"
+  }
 }
