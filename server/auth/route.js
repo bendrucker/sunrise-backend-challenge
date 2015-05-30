@@ -7,7 +7,7 @@ module.exports = function (server) {
     method: ['GET', 'POST'],
     path: '/authenticate',
     config: {
-      auth: 'google',
+      auth: 'google-oauth',
       handler: function (request, reply) {
         reply(pick(request.auth.credentials, 'token'))
       }

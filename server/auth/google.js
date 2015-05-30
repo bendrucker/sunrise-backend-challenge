@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (server) {
-  server.auth.strategy('google', 'bell', {
+  server.auth.strategy('google-oauth', 'bell', {
     provider: 'google',
     password: 'PASS',
     clientId: process.env.GOOGLE_CLIENT_ID,

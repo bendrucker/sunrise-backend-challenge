@@ -19,6 +19,7 @@
   "homepage": "https://github.com/bendrucker/sunrise-backend-challenge#readme",
   "dependencies": {
     "bell": "~3.0.0",
+    "boom": "~2.7.2",
     "catbox": "~4.2.2",
     "catbox-memory": "~1.1.1",
     "glue": "~2.0.0",
