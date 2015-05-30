@@ -1,5 +1,7 @@
 'use strict'
 
+var pick = require('lodash.pick')
+
 module.exports = function (server) {
   server.route({
     method: ['GET', 'POST'],
@@ -7,7 +9,7 @@ module.exports = function (server) {
     config: {
       auth: 'google',
       handler: function (request, reply) {
-        reply(request.auth.credentials.token)
+        reply(pick(request.auth.credentials, 'token'))
       }
     }
   })
