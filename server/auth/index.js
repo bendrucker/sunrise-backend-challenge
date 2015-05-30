@@ -2,13 +2,13 @@
 
 var bell = require('bell')
 var google = require('./google')
-var routes = require('./routes')
+var route = require('./route')
 
 exports = module.exports = function (server, options, next) {
   server.register(bell, function (err) {
     if (err) return next(err)
     google(server)
-    routes(server)
+    route(server)
     next()
   })
 }
