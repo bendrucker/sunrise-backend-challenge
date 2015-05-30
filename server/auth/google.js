@@ -3,8 +3,9 @@
 module.exports = function (server) {
   server.auth.strategy('google', 'bell', {
     provider: 'google',
-    password: '',
-    clientId: '',
-    clientSecret: ''
+    password: 'PASS',
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    isSecure: false
   })
 }
