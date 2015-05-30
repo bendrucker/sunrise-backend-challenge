@@ -6,6 +6,7 @@ module.exports = function (server) {
     password: 'PASS',
     clientId: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    isSecure: false
+    isSecure: false,
+    scope: ['email', 'https://www.googleapis.com/auth/calendar.readonly']
   })
 }
