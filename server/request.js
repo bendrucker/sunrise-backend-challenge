@@ -6,6 +6,12 @@ var apiBase = 'https://www.googleapis.com/calendar/v3/'
 
 exports = module.exports = function (server, options, next) {
   server.method('request', request)
+  var parsed = url.parse(apiBase)
+  server.expose('endpoint', {
+    host: parsed.host,
+    path: parsed.path,
+    url: apiBase
+  })
   next()
 }
 exports.attributes = {
@@ -15,5 +21,5 @@ exports.attributes = {
 function request (method, path, token, next) {
   var uri = url.resolve(apiBase, path)
   var headers = {Authorization: 'Bearer ' + token}
-  wreck.request(method, uri, {headers: headers, json: true}, next)
+  wreck.request(method, uri, {headers: headers}, next)
 }
