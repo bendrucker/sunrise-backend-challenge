@@ -1,7 +1,6 @@
 'use strict'
 
 var wreck = require('wreck')
-var qs = require('qs')
 var url = require('url')
 var apiBase = 'https://www.googleapis.com/calendar/v3/'
 

@@ -1,6 +1,5 @@
 'use strict'
 
-var pick = require('lodash.pick')
 var mapObject = require('map-obj')
 
 module.exports = function (server) {
