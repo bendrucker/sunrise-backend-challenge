@@ -3,7 +3,7 @@
 var mapObject = require('map-obj')
 var JSONStream = require('jsonstream')
 var es = require('event-stream')
-var ObjectStream = require('objstream')
+var PassThrough = require('readable-stream').PassThrough
 
 module.exports = function (server) {
   server.method('calendars.list', function listCalenders (token, next) {
@@ -12,7 +12,8 @@ module.exports = function (server) {
       next(null, result
         .pipe(JSONStream.parse('items.*'))
         .pipe(es.mapSync(parseCalendar))
-        .pipe(new ObjectStream())
+        .pipe(JSONStream.stringify())
+        .pipe(PassThrough())
       )
     })
   })
