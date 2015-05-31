@@ -4,7 +4,7 @@
   "description": "Sunrise Backend Engineer Challenge",
   "main": "./server",
   "scripts": {
-    "test": "standard && lab",
+    "test": "standard && tape test/*.js",
     "start": "node ./server/start"
   },
   "repository": {
@@ -32,8 +32,7 @@
     "wreck": "~5.5.1"
   },
   "devDependencies": {
-    "code": "~1.4.0",
-    "lab": "~5.9.0",
-    "standard": "~3.11.1"
+    "standard": "~3.11.1",
+    "tape": "~4.0.0"
   }
 }
