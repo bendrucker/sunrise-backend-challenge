@@ -53,6 +53,24 @@ test('calendar', function (t) {
     }
   })
 
+  t.test('parser', function (t) {
+    t.plan(8)
+    var parse = server.plugins.calendar.parser
+    function testParser (inputKey, inputValue, outputKey, outputValue, comment) {
+      var target = {}
+      target[inputKey] = inputValue
+      t.equal(parse(target)[outputKey], outputValue, outputKey + (comment || ''))
+    }
+    testParser('id', 'theId', 'id', 'theId')
+    testParser('summary', 'My Great Cal', 'title', 'My Great Cal')
+    testParser('backgroundColor', '#ff5d4f', 'color', 'ff5d4f')
+    testParser('backgroundColor', null, 'color', '', ' (null background color)')
+    testParser('accessRole', 'writer', 'writable', true)
+    testParser('accessRole', 'reader', 'writable', false, ' (read only)')
+    testParser('selected', true, 'selected', true)
+    testParser('timeZone', 'America/New_York', 'timezone', 'America/New_York')
+  })
+
   t.test('after', function (t) {
     server.stop(t.end.bind(t))
   })

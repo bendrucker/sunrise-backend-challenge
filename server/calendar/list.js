@@ -16,13 +16,14 @@ module.exports = function (server) {
       )
     })
   })
+  server.expose('parser', parseCalendar)
 }
 
 var parsers = {
   id: identity,
   title: ['summary', identity],
   color: ['backgroundColor', function (hex) {
-    return hex.substr(1, hex.length)
+    return hex ? hex.substr(1, hex.length) : ''
   }],
   writable: ['accessRole', function (role) {
     return role === 'writer' || role === 'owner'
