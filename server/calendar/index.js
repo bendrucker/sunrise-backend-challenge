@@ -1,11 +1,11 @@
 'use strict'
 
-var route = require('./route')
-var list = require('./list')
+var routes = require('./routes')
+var listCalendars = require('./list')
 
 exports = module.exports = function (server, options, next) {
-  route(server)
-  list(server)
+  routes(server)
+  listCalendars(server)
   next()
 }
 exports.attributes = {
