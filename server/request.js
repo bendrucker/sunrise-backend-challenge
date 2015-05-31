@@ -15,7 +15,5 @@ exports.attributes = {
 function request (method, path, token, next) {
   var uri = url.resolve(apiBase, path)
   var headers = {Authorization: 'Bearer ' + token}
-  wreck[method](uri, {headers: headers, json: true}, function (err, response, payload) {
-    next(err, payload)
-  })
+  wreck.request(method, uri, {headers: headers, json: true}, next)
 }
