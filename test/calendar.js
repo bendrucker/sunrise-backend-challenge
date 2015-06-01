@@ -71,6 +71,99 @@ test('calendar', function (t) {
     testParser('timeZone', 'America/New_York', 'timezone', 'America/New_York')
   })
 
+  t.test('events', function (t) {
+    t.test('list', function (t) {
+      t.plan(3)
+      api
+        .get(join(basePath, 'calendars/123/events?maxResults=250'))
+        .reply(200, function () {
+          t.equal(this.req.headers.authorization, 'Bearer theToken')
+          return {
+            items: [{
+              id: 'evId',
+              status: 'confirmed',
+              summary: 'Party',
+              location: 'Space',
+              attendees: [
+                {
+                  displayName: 'Ben Drucker',
+                  email: 'bvdrucker@gmail.com',
+                  self: true
+                },
+                {
+                  displayName: 'Barack Obama',
+                  email: 'president@whitehouse.gov'
+                }
+              ],
+              organizer: {
+                displayName: 'Ben Drucker',
+                email: 'bvdrucker@gmail.com',
+                self: true
+              },
+              start: {
+                dateTime: '2015-06-01T00:00:00-04:00',
+                timeZone: 'America/New_York'
+              },
+              end: {
+                dateTime: '2015-07-01T00:00:00-04:00',
+                timeZone: 'America/New_York'
+              },
+              creator: {
+                displayName: 'Ben Drucker',
+                email: 'bvdrucker@gmail.com',
+                self: true
+              },
+              recurrence: ['RRULE:FREQ=MONTHLY']
+            }]
+          }
+        })
+      server.inject({
+        url: '/calendars/123/events',
+        credentials: {
+          token: 'theToken'
+        }
+      }, testResponse)
+      function testResponse (response) {
+        t.equal(response.statusCode, 200)
+        var payload = JSON.parse(response.payload)
+        t.deepEqual(payload, [{
+          id: 'evId',
+          status: 'confirmed',
+          title: 'Party',
+          location: 'Space',
+          attendees: [
+            {
+              name: 'Ben Drucker',
+              emails: ['bvdrucker@gmail.com'],
+              self: true
+            },
+            {
+              name: 'Barack Obama',
+              emails: ['president@whitehouse.gov'],
+              self: false
+            }
+          ],
+          organizer: {
+            name: 'Ben Drucker',
+            emails: ['bvdrucker@gmail.com'],
+            self: true
+          },
+          start: {
+            dateTime: '2015-06-01T00:00:00-04:00',
+            timezone: 'America/New_York'
+          },
+          end: {
+            dateTime: '2015-07-01T00:00:00-04:00',
+            timezone: 'America/New_York'
+          },
+          recurrence: 'RRULE:FREQ=MONTHLY',
+          editable: true
+        }])
+      }
+    })
+    t.end()
+  })
+
   t.test('after', function (t) {
     server.stop(t.end.bind(t))
   })
