@@ -20,8 +20,6 @@
   "dependencies": {
     "bell": "~3.0.0",
     "boom": "~2.7.2",
-    "catbox": "~4.2.2",
-    "catbox-memory": "~1.1.1",
     "event-stream": "~3.3.1",
     "glue": "~2.0.0",
     "good": "~6.1.4",
