@@ -73,93 +73,126 @@ test('calendar', function (t) {
 
   t.test('events', function (t) {
     t.test('list', function (t) {
-      t.plan(3)
-      api
-        .get(join(basePath, 'calendars/123/events?maxResults=250'))
-        .reply(200, function () {
-          t.equal(this.req.headers.authorization, 'Bearer theToken')
-          return {
-            items: [{
-              id: 'evId',
-              status: 'confirmed',
-              summary: 'Party',
-              location: 'Space',
-              attendees: [
-                {
-                  displayName: 'Ben Drucker',
-                  email: 'bvdrucker@gmail.com',
-                  self: true
-                },
-                {
-                  displayName: 'Barack Obama',
-                  email: 'president@whitehouse.gov'
-                }
-              ],
-              organizer: {
-                displayName: 'Ben Drucker',
-                email: 'bvdrucker@gmail.com',
-                self: true
-              },
-              start: {
-                dateTime: '2015-06-01T00:00:00-04:00',
-                timeZone: 'America/New_York'
-              },
-              end: {
-                dateTime: '2015-07-01T00:00:00-04:00',
-                timeZone: 'America/New_York'
-              },
-              creator: {
-                displayName: 'Ben Drucker',
-                email: 'bvdrucker@gmail.com',
-                self: true
-              },
-              recurrence: ['RRULE:FREQ=MONTHLY']
-            }]
+      var event = {
+        id: 'evId',
+        status: 'confirmed',
+        summary: 'Party',
+        location: 'Space',
+        attendees: [
+          {
+            displayName: 'Ben Drucker',
+            email: 'bvdrucker@gmail.com',
+            self: true
+          },
+          {
+            displayName: 'Barack Obama',
+            email: 'president@whitehouse.gov'
           }
-        })
-      server.inject({
-        url: '/calendars/123/events',
-        credentials: {
-          token: 'theToken'
-        }
-      }, testResponse)
-      function testResponse (response) {
-        t.equal(response.statusCode, 200)
-        var payload = JSON.parse(response.payload)
-        t.deepEqual(payload, [{
-          id: 'evId',
-          status: 'confirmed',
-          title: 'Party',
-          location: 'Space',
-          attendees: [
-            {
+        ],
+        organizer: {
+          displayName: 'Ben Drucker',
+          email: 'bvdrucker@gmail.com',
+          self: true
+        },
+        start: {
+          dateTime: '2015-06-01T00:00:00-04:00',
+          timeZone: 'America/New_York'
+        },
+        end: {
+          dateTime: '2015-07-01T00:00:00-04:00',
+          timeZone: 'America/New_York'
+        },
+        creator: {
+          displayName: 'Ben Drucker',
+          email: 'bvdrucker@gmail.com',
+          self: true
+        },
+        recurrence: ['RRULE:FREQ=MONTHLY']
+      }
+      t.test('single page', function (t) {
+        t.plan(3)
+        api
+          .get(join(basePath, 'calendars/123/events?maxResults=250'))
+          .reply(200, function () {
+            t.equal(this.req.headers.authorization, 'Bearer theToken')
+            return {
+              items: [event]
+            }
+          })
+        server.inject({
+          url: '/calendars/123/events',
+          credentials: {
+            token: 'theToken'
+          }
+        }, testResponse)
+        function testResponse (response) {
+          t.equal(response.statusCode, 200)
+          var payload = JSON.parse(response.payload)
+          t.deepEqual(payload, [{
+            id: 'evId',
+            status: 'confirmed',
+            title: 'Party',
+            location: 'Space',
+            attendees: [
+              {
+                name: 'Ben Drucker',
+                emails: ['bvdrucker@gmail.com'],
+                self: true
+              },
+              {
+                name: 'Barack Obama',
+                emails: ['president@whitehouse.gov'],
+                self: false
+              }
+            ],
+            organizer: {
               name: 'Ben Drucker',
               emails: ['bvdrucker@gmail.com'],
               self: true
             },
-            {
-              name: 'Barack Obama',
-              emails: ['president@whitehouse.gov'],
-              self: false
+            start: {
+              dateTime: '2015-06-01T00:00:00-04:00',
+              timezone: 'America/New_York'
+            },
+            end: {
+              dateTime: '2015-07-01T00:00:00-04:00',
+              timezone: 'America/New_York'
+            },
+            recurrence: 'RRULE:FREQ=MONTHLY',
+            editable: true
+          }])
+        }
+      })
+      t.test('multi page', function (t) {
+        t.plan(2)
+        server.plugins.calendar.events.pageSize = 1
+        api
+          .get(join(basePath, 'calendars/123/events?maxResults=1'))
+          .reply(200, function () {
+            return {
+              items: [event],
+              nextPageToken: 'npt'
             }
-          ],
-          organizer: {
-            name: 'Ben Drucker',
-            emails: ['bvdrucker@gmail.com'],
-            self: true
-          },
-          start: {
-            dateTime: '2015-06-01T00:00:00-04:00',
-            timezone: 'America/New_York'
-          },
-          end: {
-            dateTime: '2015-07-01T00:00:00-04:00',
-            timezone: 'America/New_York'
-          },
-          recurrence: 'RRULE:FREQ=MONTHLY',
-          editable: true
-        }])
-      }
+          })
+        api
+          .get(join(basePath, 'calendars/123/events?maxResults=1&pageToken=npt'))
+          .reply(200, function () {
+            return {
+              items: [event]
+            }
+          })
+        server.inject({
+          url: '/calendars/123/events',
+          credentials: {
+            token: 'theToken'
+          }
+        }, testResponse)
+        function testResponse (response) {
+          t.equal(response.statusCode, 200)
+          var payload = JSON.parse(response.payload)
+          t.equal(payload.length, 2, 'walks through pages')
+        }
+      })
     })
     t.end()
   })
