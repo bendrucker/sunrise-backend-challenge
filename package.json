@@ -4,7 +4,7 @@
   "description": "Sunrise backend challenge",
   "main": "index.js",
   "scripts": {
-    "test": "tape '!(node_modules)/**/*.spec.js' | tap-difflet"
+    "test": "tape '!(node_modules)/**/*.spec.js'"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,5 @@
   "dependencies": {
     "obstruction": "~1.0.0"
   },
-  "devDependencies": {
-    "tap-difflet": "~0.3.0"
-  }
+  "devDependencies": {}
 }
