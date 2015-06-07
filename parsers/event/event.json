@@ -1,0 +1,47 @@
+{
+  "kind": "calendar#event",
+  "etag": "\"2865728950062000\"",
+  "id": "_dh1l2i2d6l466u3681mmapbk5ppnarjid5pmabj1dk",
+  "status": "confirmed",
+  "htmlLink": "https://www.google.com/calendar/event?eid=X2RoMWwyaTJkNmw0NjZ1MzY4MW1tYXBiazVwcG5hcmppZDVwbWFiajFkayBidmRydWNrZXJAbQ",
+  "created": "2015-05-28T13:03:00.000Z",
+  "updated": "2015-05-29T14:46:09.379Z",
+  "summary": "Ben / Pierre",
+  "description": "My cell is 973-985-6070",
+  "creator": {
+    "email": "bvdrucker@gmail.com",
+    "displayName": "Ben Drucker",
+    "self": true
+  },
+  "organizer": {
+    "email": "bvdrucker@gmail.com",
+    "displayName": "Ben Drucker",
+    "self": true
+  },
+  "start": {
+    "dateTime": "2015-05-29T11:00:00-04:00",
+    "timeZone": "America/New_York"
+  },
+  "end": {
+    "dateTime": "2015-05-29T11:30:00-04:00",
+    "timeZone": "America/New_York"
+  },
+  "iCalUID": "lCQHM5Hcxf@meet.sunrise.am",
+  "sequence": 0,
+  "attendees": [
+    {
+      "email": "pival@microsoft.com",
+      "displayName": "Pierre Valade",
+      "responseStatus": "accepted"
+    }
+  ],
+  "reminders": {
+    "useDefault": false,
+    "overrides": [
+      {
+        "method": "popup",
+        "minutes": 15
+      }
+    ]
+  }
+}
