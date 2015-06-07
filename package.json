@@ -1,0 +1,19 @@
+{
+  "name": "sunrise-backend-challenge",
+  "version": "0.0.0",
+  "description": "Sunrise backend challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape '!(node_modules)/**/*.spec.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bendrucker/sunrise-backend-challenge.git"
+  },
+  "author": "Ben Drucker <bvdrucker@gmail.com> (http://bendrucker.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bendrucker/sunrise-backend-challenge/issues"
+  },
+  "homepage": "https://github.com/bendrucker/sunrise-backend-challenge#readme"
+}
