@@ -2,7 +2,7 @@
 
 var test = require('tape')
 var parse = require('./')
-var event = require('./event.json')
+var event = require('../fixture.json')
 
 test('event parser', function (t) {
   t.deepEqual(parse(event), {

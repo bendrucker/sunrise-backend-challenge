@@ -1,8 +1,8 @@
 'use strict'
 
 var test = require('tape')
-var parse = require('./')
-var calendar = require('./calendar.json')
+var parse = require('./parser')
+var calendar = require('./fixture.json')
 
 test('calendar parser', function (t) {
   t.deepEqual(parse(calendar), {
