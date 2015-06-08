@@ -27,7 +27,8 @@ test('getting token', function (t) {
         code: 'theAuth',
         client_id: 'theClientId',
         client_secret: 'theClientSecret',
-        grant_type: 'authorization_code'
+        grant_type: 'authorization_code',
+        redirect_uri: 'theCb'
       })
       return true
     })
@@ -37,7 +38,12 @@ test('getting token', function (t) {
     })
     .reply(200, JSON.stringify(response))
 
-  token.get('theAuth', google, function (err, auth) {
+  var options = {
+    auth: 'theAuth',
+    client: google,
+    callbackUrl: 'theCb'
+  }
+  token.get(options, function (err, auth) {
     if (err) return t.end(err)
     t.deepEqual(auth, response)
   })

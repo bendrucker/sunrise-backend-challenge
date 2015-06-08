@@ -37,7 +37,7 @@ test('auth routes', function (t) {
         var query = url.parse(response.headers.location, true).query
         t.deepEqual(query, {
           client_id: 'theClientId',
-          redirect_uri: 'http://localhost:9999/callback',
+          redirect_uri: 'http://localhost:9999/authenticate/callback',
           response_type: 'code',
           scope: 'https://www.googleapis.com/auth/calendar.readonly'
         })
@@ -46,11 +46,12 @@ test('auth routes', function (t) {
     })
 
     t.test('callback', function (t) {
-      t.plan(4)
+      t.plan(5)
       // mock token.get
-      token.get = function (code, client, callback) {
-        t.equal(code, 'theCode', 'auth code')
-        t.deepEqual(client, auth.locals.google, 'receives client')
+      token.get = function (options, callback) {
+        t.equal(options.auth, 'theCode', 'auth code')
+        t.deepEqual(options.client, auth.locals.google, 'receives client')
+        t.ok(options.callbackUrl, 'includes callback url')
         callback(null, {access_token: 'at'}, {statusCode: 200})
       }
       http.get('http://localhost:9999/authenticate/callback?code=theCode', function (response) {
@@ -66,7 +67,7 @@ test('auth routes', function (t) {
     t.test('callback - err', function (t) {
       t.plan(2)
       // mock token.get to fail
-      token.get = function (code, client, callback) {
+      token.get = function (options, callback) {
         callback(new Error('broken'), {}, {statusCode: 401})
       }
       http.get('http://localhost:9999/authenticate/callback', function (response) {
