@@ -7,17 +7,17 @@ module.exports = obstruct({
   id: true,
   status: true,
   title: 'summary',
-  start: {
+  start: obstruct.optional({
     dateTime: true,
     timezone: 'timeZone'
-  },
-  end: {
+  }),
+  end: obstruct.optional({
     dateTime: true,
     timezone: 'timeZone'
-  },
+  }),
   location: true,
-  attendees: obstruct.array(person.attendee),
-  organizer: person.organizer,
+  attendees: obstruct.optional(obstruct.array(person.attendee)),
+  organizer: obstruct.optional(person.organizer),
   editable: ['creator.self', Boolean],
   recurrence: '0'
 })

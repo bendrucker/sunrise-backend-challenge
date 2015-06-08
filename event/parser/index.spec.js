@@ -34,5 +34,6 @@ test('event parser', function (t) {
     location: undefined,
     recurrence: undefined
   })
+  t.doesNotThrow(parse.bind(null, {}))
   t.end()
 })
