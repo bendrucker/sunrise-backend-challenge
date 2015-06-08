@@ -17,4 +17,3 @@ exports.organizer = obstruct(base)
 exports.attendee = obstruct(extend(base, {
   rsvpStatus: 'responseStatus'
 }))
-

@@ -22,8 +22,9 @@ test('access token query validator', function (t) {
     })
 
     t.test('missing', function (t) {
-      t.plan(2)
+      t.plan(3)
       got('http://localhost:9999', {json: true}, function (err, data, response) {
+        t.ok(err)
         t.equal(response.statusCode, 401, '401')
         t.deepEqual(data, {
           error: 'accessToken param missing'

@@ -9,7 +9,7 @@ module.exports = function (app) {
         console.error(err)
         res.status(500).json({
           error: 'Could not fetch calendars'
-        }) 
+        })
       } else {
         res.json(calendars)
       }

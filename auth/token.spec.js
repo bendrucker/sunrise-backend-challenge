@@ -20,7 +20,7 @@ test('getting token', function (t) {
     expires_in: 3600,
     refresh_token: 'theRefresh'
   }
-  
+
   api
     .post(token.url.pathname, function (body) {
       t.deepEqual(qs.parse(body), {

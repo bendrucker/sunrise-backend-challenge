@@ -6,7 +6,6 @@ var path = require('path')
 var token = require('./token')
 
 module.exports = function (app) {
-
   app.get('/', function (req, res) {
     res.redirect('https://accounts.google.com/o/oauth2/auth?' + qs.stringify({
       redirect_uri: callbackUrl(req),
@@ -44,4 +43,3 @@ module.exports = function (app) {
 
   return app
 }
-

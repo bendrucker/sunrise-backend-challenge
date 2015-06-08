@@ -3,7 +3,6 @@
 var test = require('tape')
 var url = require('url')
 var express = require('express')
-var shot = require('shot')
 var http = require('http')
 var url = require('url')
 var readAllStream = require('read-all-stream')

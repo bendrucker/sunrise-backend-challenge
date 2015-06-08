@@ -8,11 +8,6 @@ exports.list = function (calendarId, token, callback) {
   var path = printf('calendars/%s/events', calendarId)
   var events = []
   function walk (page) {
-    if (typeof page === 'function') {
-      next = page
-      page = undefined
-    }
-
     var options = {token: token}
     if (page) options.query = {pageToken: page}
 
