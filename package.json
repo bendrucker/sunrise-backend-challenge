@@ -4,7 +4,8 @@
   "description": "Sunrise backend challenge",
   "main": "index.js",
   "scripts": {
-    "test": "tape '**/*.spec.js'"
+    "test": "tape '**/*.spec.js'",
+    "start": "node ./bootstrap"
   },
   "repository": {
     "type": "git",
