@@ -10,7 +10,7 @@ module.exports = function (app) {
     var callbackUrl = url.format({
       protocol: req.protocol,
       host: req.get('host'),
-      pathname: path.join(req.path, 'callback')
+      pathname: path.join(app.mountpath, req.path, 'callback')
     })
     res.redirect('https://accounts.google.com/o/oauth2/auth?' + qs.stringify({
       redirect_uri: callbackUrl,
@@ -32,4 +32,6 @@ module.exports = function (app) {
       }
     })
   })
+
+  return app
 }
