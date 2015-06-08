@@ -19,7 +19,8 @@
   "dependencies": {
     "got": "~3.2.0",
     "obstruction": "~1.0.0",
-    "pff": "~1.0.0"
+    "pff": "~1.0.0",
+    "qs": "~3.1.0"
   },
   "devDependencies": {
     "nock": "~2.4.0"
