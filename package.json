@@ -18,7 +18,8 @@
   "homepage": "https://github.com/bendrucker/sunrise-backend-challenge#readme",
   "dependencies": {
     "got": "~3.2.0",
-    "obstruction": "~1.0.0"
+    "obstruction": "~1.0.0",
+    "pff": "~1.0.0"
   },
   "devDependencies": {
     "nock": "~2.4.0"
