@@ -1,5 +1,7 @@
 # backend-challenge
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bendrucker/sunrise-backend-challenge.svg)](https://greenkeeper.io/)
+
 [Ben Drucker](http://bendrucker.me)
 
 
